@@ -11,7 +11,7 @@ namespace AlgoLibrary
 
         static Random random = new Random();
 
-        private static readonly Random rand = new Random();
+        public static  Random rand = new Random();
 
         static public double[,] Coordinates = CreateCoordinates();
 
@@ -25,7 +25,8 @@ namespace AlgoLibrary
             {
                 for (int i = 0; i < PopulationSize; i++)
                 {
-                    New = rand.NextDouble() * (MaxRangeX[1] - MaxRangeX[0]) + MaxRangeX[0];
+                    New = rand.NextDouble() * (MaxRangeX[1] - MaxRangeX[0] + MaxRangeX[0]);
+
                     coords[i, k] = Math.Max(MaxRangeX[0], Math.Min(New, MaxRangeX[1]));
                 }
             }
@@ -34,24 +35,55 @@ namespace AlgoLibrary
         }
 
 
-        public static double SetValues(double[,] Coordinates)
+        public static void SetValues(double[,] Coordinates)
         {
-            double[] values = new double[PopulationSize];
 
             for (int i = 0; i < PopulationSize; i++)
             {
-                Coordinates[i,2] = Function.FunctionOne(Coordinates[i,0],Coordinates[i,1]);
+                Coordinates[i,2] = Math.Round(Function.FunctionOne(Coordinates[i,0],Coordinates[i,1]),3,MidpointRounding.AwayFromZero);
             }
 
-            return 0;
         }
 
         public static void ShowPoints(double[,] Coordinates)
         {
             for (int i = 0; i < PopulationSize; i++)
             {
-               Console.WriteLine($"X: {Coordinates[i, 0]}      Y: {Coordinates[i,1]}       Value: {Coordinates[i,2]}" );
+               Console.WriteLine($"X: {Coordinates[i, 0]}  \tY: {Coordinates[i,1]}  \tValue: {Coordinates[i,2]}" );
             }
+        }
+
+        static public void BubbleSort(double[,] coordinates)
+        {
+            bool exchanges;
+            do
+            {
+                exchanges = false;
+                for (int i = 0; i < coordinates.Length / 3 - 1; i++)
+                {
+                    if (coordinates[i, 2] > coordinates[i + 1, 2])
+                    {
+                        //Exchange elements
+                        double temp = coordinates[i, 2];
+                        coordinates[i, 2] = coordinates[i + 1, 2];
+                        coordinates[i + 1, 2] = temp;
+
+
+                        temp = coordinates[i, 1];
+                        coordinates[i, 1] = coordinates[i + 1, 1];
+                        coordinates[i + 1, 1] = temp;
+
+                        temp = coordinates[i, 0];
+                        coordinates[i, 0] = coordinates[i + 1, 0];
+                        coordinates[i + 1, 0] = temp;
+
+                        exchanges = true;
+
+                    }
+                }
+            } while (exchanges);
+
+
         }
 
 
