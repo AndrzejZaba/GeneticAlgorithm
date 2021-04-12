@@ -1,7 +1,7 @@
 # GeneticAlgorithm
 
 It's the simple console implemantation of the genetic algorithm I have learned during my calsses. It's rewrited form orginal programme I've made in Matlab. 
-Its aim is to find minimum of the given function. It works properly on the function of two variables, but it won't be a problem to rebuilt this programme for three four or more variables. 
+Its aim is to find minimum value of the given function. It works properly on the function of two variables, but it won't be a problem to rebuilt this programme for three four or more variables. 
 
 The general idea is:
 1. we pick the max range we are going to search our solution (here X [-10,10] , Y [-10,10]).
